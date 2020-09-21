@@ -133,7 +133,7 @@ const Header = () => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <Typography className={classes.lnkroot}>
+          
       
       <Link className={classes.lnkroot}>
         news
@@ -141,10 +141,11 @@ const Header = () => {
       <Link to="/home" className={classes.lnkroot} >
         views
       </Link >
-    </Typography>
-       
-          <Typography className={classes.title} variant="h6" noWrap>News<Link  to="/home"></Link></Typography>   
-        
+      <Link to="/home" className={classes.lnkroot}>Destination</Link>
+      <Link to="/home" className={classes.lnkroot}>Blog</Link>
+      <Link to="/book" className={classes.lnkroot}>Contact</Link>
+      <Link to="/login"><Button className={classes.bukinLoginBtn}>Login</Button></Link>
+
           
 
         </Toolbar>
