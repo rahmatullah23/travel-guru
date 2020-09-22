@@ -146,8 +146,6 @@ const Header = () => {
       <Link to="/book" className={classes.lnkroot}>Contact</Link>
       <Link to="/login"><Button className={classes.bukinLoginBtn}>Login</Button></Link>
 
-          
-
         </Toolbar>
       </AppBar>
     </div>
@@ -155,46 +153,6 @@ const Header = () => {
                 </Container>
 
            
-            
-            <nav  className="nav">
-                <ul >
-                    <li style={{marginTop:'30px'}} >
-                        <img  className="logo" src={logo} alt="" />
-                    </li>
-                    <li>
-                    <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
-                    </li>
-                    <li>
-                        <Link to="/home">News</Link>
-                    </li>
-                    <li>
-                        <Link to="/home">Destination</Link>
-                    </li>
-                    <li>
-                        <Link to="/home">Blog</Link>
-                    </li>
-
-                    <li>
-                        <Link className="btn-book" to="/book">Book</Link>
-                    </li>
-                    <li >
-                        <Link to="/login"><Button className={classes.bukinLoginBtn}>Login</Button></Link>
-                    </li>
-                </ul>
-            </nav>
-
             <div>
                 <Grid style={{ marginTop: '120px', marginLeft: '60px' }} container spacing={5}>
                     <Box>
@@ -254,7 +212,7 @@ const Header = () => {
                     </Grid>
                 </Grid>
             </div>            
-            <div style={{marginTop:"30px"}}>   >
+            <div style={{marginTop:"30px"}}>  
                 <Grid container spacing={3}>
                     <Grid container alignItems="flex-start" justify="flex-end" direction="row" item xs={6} >
                         <Fab >
