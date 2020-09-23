@@ -144,7 +144,8 @@ const Logins = () => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <TextField 
+                onBlur={handleBlur}
                 variant="outlined"
                 required
                 fullWidth
@@ -155,7 +156,8 @@ const Logins = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField onBlur={handleBlur}
+              <TextField 
+                onBlur={handleBlur}
                 variant="outlined"
                 required
                 fullWidth
@@ -168,6 +170,7 @@ const Logins = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                onBlur={handleBlur}   
                 variant="outlined"
                 required
                 fullWidth
@@ -178,30 +181,63 @@ const Logins = () => {
                 autoComplete="current-password"
               />
             </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="confirm-password"
+                label="Confirm Password"
+                type="password"
+                id="confirm-password"
+                autoComplete="current-password"
+              />
+            </Grid>
           </Grid>
-          <Button
+          <Button 
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            className={classes.submit} 
+            
           >
+              <input type="submit" value={newUser ? 'Sign up' : 'Sign in'}/>
             Sign Up
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
-              </Link>
+            <input type="checkbox" onChange={() => setNewUser(!newUser)} name="newUser" id=""/>
+            <label htmlFor="newUser">Already have an account? Sign in</label>
             </Grid>
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
+    
       { user.isSignedIn ? <button onClick={signOut}>Sign Out</button> :
-        <button onClick={googleSignIn}>Sign In</button>
+        <Button 
+        type="submit"
+        fullWidth
+        variant="outlined"
+        color="primary"
+        className={classes.submit} 
+        onClick={fbSignIn}
+        >
+            Continue with Facebook
+        </Button>
       }
-      </Box>
+      { user.isSignedIn ? <button onClick={signOut}>Sign Out</button> :
+        <Button 
+        type="submit"
+        fullWidth
+        variant="outlined"
+        color="primary"
+        className={classes.submit} 
+         onClick={googleSignIn}
+         >
+             Continue with Google</Button>
+      }
+    
     </Container>
   );
 };
