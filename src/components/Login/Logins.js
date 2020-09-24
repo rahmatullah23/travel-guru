@@ -131,30 +131,21 @@ const Logins = () => {
         </Typography>
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+          {newUser && 
+            <Grid item  sm={12}>
               <TextField
+              onBlur={handleBlur}
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
+                id="Name"
+                label="Your Name"
                 autoFocus
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField 
-                onBlur={handleBlur}
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid>
+            </Grid> }
+            
             <Grid item xs={12}>
               <TextField 
                 onBlur={handleBlur}
@@ -202,13 +193,23 @@ const Logins = () => {
             className={classes.submit} 
             
           >
-              <input type="submit" value={newUser ? 'Sign up' : 'Sign in'}/>
+            <input type="submit" value={newUser ? 'Sign up' : 'Sign in'}/>
             Sign Up
           </Button>
+          {
+                    newUser ? <Button fullWidth variant="contained" >Login</Button>
+                    : <Button fullWidth variant="contained"> Create an account </Button>
+                }  
+                {/* {newUser ? <button className="btn btn-outline-secondary mt-2" onClick={() => setNewUser(!newUser)}>Log In</button> : <button className="btn btn-outline-success mt-2" onClick={() => setNewUser(!newUser)}>Create an account</button>} */}
+                {newUser ? <p onClick={() => setNewUser(!newUser)}>Already have an account? Sign in</p> : <p onClick={() => setNewUser(!newUser)}> Create an account</p>}
+      <br />
+      {loggedInUser.email && <p style={{ color: "green" }}>user {newUser ? "created" : "logged in"} successfully</p>}
+      <br />
           <Grid container justify="flex-end">
-            <Grid item>
-            <input type="checkbox" onChange={() => setNewUser(!newUser)} name="newUser" id=""/>
-            <label htmlFor="newUser">Already have an account? Sign in</label>
+            <Grid item>            
+            <label style={{cursor : "pointer"}}  onClick={() => setNewUser(!newUser)} name="newUser" >Already have an account? Sign in</label>
+                 
+
             </Grid>
           </Grid>
         </form>
