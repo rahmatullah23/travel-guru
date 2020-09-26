@@ -5,15 +5,14 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
+import { red, yellow } from '@material-ui/core/colors';
 import LocalHotelIcon from '@material-ui/icons/LocalHotel';
-import WcIcon from '@material-ui/icons/Wc';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import { useHistory } from 'react-router-dom';
+import {  Grid } from '@material-ui/core';
+import StarIcon from '@material-ui/icons/Star';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,53 +32,52 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  avatar: {
-    backgroundColor: red[500],
-  },
+  
 }));
 
 export default function Room({room}){
   const classes = useStyles();
-  const history = useHistory()
-    const handleBook = (bedType) => {
-        history.push(`/book/${bedType}`);
-    }
-  return (
-    <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            {room.avatar}
-          </Avatar>
-        }
-        title={room.title}
-      />
-
+  //  const { title } = useParams();
+  // const history = useHistory()
+    // const handleBook = (bedType) => {
+    //     history.push(`/book/${bedType}`);
+    // }
+  return (      
+    <Card style={{marginTop:'20px'}} >
+      <Grid container>
+      <Grid container item md={6}>
       <CardMedia
+      style={{height: '120px', width: '300px'}}
         className={classes.media}
-        image={room.imgUrl}
+        image={room.img}
         title="Paella dish"
       />
-      <img src={`/images/${room.bedType}.png`} alt=""/>
+      </Grid>
+      <Grid container item md={6}>
+      <CardHeader
+        title={room.title}
+      />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {room.description}
+      <Typography variant="body2" color="textSecondary" component="p">
+          4 Guest  2bedrooms  2beds  2baths
         </Typography>
+      <Typography style={{margin:'10px 0'}} variant="body2" color="textSecondary" component="p">
+          Wifi Air Conditioning kitchen 
+        </Typography>
+      <Typography variant="body2" color="textSecondary" component="p">
+          Cancellation flexibility available
+        </Typography> 
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <LocalHotelIcon />: {room.bed} 
-        </IconButton>
-        <IconButton aria-label="share">
-          <WcIcon />: {room.capacity} 
+      <CardActions  >
+        <IconButton  aria-label="add to favorites">
+          <StarIcon style={{ color: yellow[500], fontSize: 16  }}/> <span style={{fontSize:'16px', color:'#000'}}>{room.star}</span> 
         </IconButton>
         <IconButton aria-label="price">
-          <AttachMoneyIcon />: {room.price} 
+          <AttachMoneyIcon fontSize="small"/> <span style={{fontSize:'16px', color:'#000'}}>{room.price}/night <small>$167 total</small> </span>
         </IconButton>
-        <Button onClick={() => handleBook(room.bedType)} variant="contained" color="primary">
-            Book
-        </Button>
       </CardActions>
+      </Grid>
+      </Grid>
     </Card>
   );
 }

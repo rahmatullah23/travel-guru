@@ -1,51 +1,56 @@
 import React from 'react';
-import Room from '../Room/Room';
+// import './Home.css';
+
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Destination from '../Destination/Destination';
+import fakeData from '../FakeData/index';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 
 const Home = () => {
-    const style = {
-        display: 'flex',
-        margin: '40px',
-        justifyContent: 'space-between'
-    }
-    const rooms = [
-        {
-            title: 'Standard Single Room',
-            description: 'Standard Single Rooms are designed in open -concept living area and have many facilities.',
-            imgUrl: 'https://cdn.jumeirah.com/-/mediadh/dh/hospitality/jumeirah/offers/offer-images/burj-al-arab-presidential-suite-living-room-4-hero.jpg',
-            bed: 1,
-            capacity: 1,
-            bedType: 'Single',
-            avatar: 'S',
-            price: 119
-        },
-        {
-            title: 'Couple Power Room',
-            description: 'Superior Double Rooms are perfectly equipped for traveling couples or friends.',
-            imgUrl: 'https://cdn.jumeirah.com/-/mediadh/dh/hospitality/jumeirah/offers/offer-images/burj-al-arab-royal-suite-staircase-5-hero.jpg',
-            bed: 1,
-            capacity: 2,
-            bedType: 'Double',
-            avatar: 'D',
-            price: 149
-        },
-        {
-            title: 'Family Capacity Room',
-            description: ' Have lots of in-room facilities and are designed in open-concept living area.',
-            imgUrl: 'https://cdn.jumeirah.com/-/mediadh/dh/hospitality/jumeirah/hotels/dubai/burj-al-arab-jumeirah/room/presidential-two-bedroom-suite/burj-al-arab-presidential-suite-guest-bedroom_6-4_landscape/burj-al-arab-presidential-suite-guest-bedroom_16-9_landscape.jpg?w=2080',
-            bed: 2,
-            capacity: 4,
-            bedType: 'Family',
-            avatar: 'F',
-            price: 199
-        }
-    ]
-    return (
-        <div style={style}>
-            {
-                rooms.map(room => <Room key={room.bedType} room={room}></Room>)
-            }
-        </div>
-    );
+  const classes = useStyles();
+
+  const location = fakeData;
+    console.log(location)
+  return (
+    <div className='marginTop'>
+      <div className={classes.root}>
+        <Grid container spacing={2}>
+          <Grid item md={4} className={classes.detail}>
+            <div style={{color: 'white'}}>
+              <h1>COX'S BAZAR</h1>
+              <p>Cox's Bazar is a town on the southeaset coast of Bangladesh. It's knowns for it's very long, sandy, beachfront, stretching from sea beach in the north to Kolatoli Beach in the south. Aggameda khyang monsastery is home to bronze statues and centuries-old Buddhist manuscripts. South of town, the tropical rainforest of Himchari National Park has waterfalls and many birds. North, sea turtles breed on nearby Sonadia Island.</p>
+              <a href='/booking/1' className='btn btn-warning my-2 mr-sm-0'>
+                Booking
+              </a>
+            </div> 
+            </Grid>
+            <Grid container item md={8} spacing={2} >
+          
+          <Grid item md={2}>
+            <Destination location={location[0]}></Destination>
+          </Grid>
+          <Grid item md={2}>
+            <Destination location={location[1]}></Destination>
+          </Grid>
+          <Grid item md={2}>
+            <Destination location={location[2]}></Destination>
+          </Grid>
+          </Grid>
+        </Grid>
+      </div>
+    </div>
+  );
 };
 
 export default Home;

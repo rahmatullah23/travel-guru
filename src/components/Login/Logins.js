@@ -23,6 +23,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    backgroundColor:'white',
+    padding: '20px'
   },
   avatar: {
     margin: theme.spacing(1),
@@ -39,6 +41,12 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Logins = () => {
+    const toggleSignUp = () => {
+        setNewUser(true);
+      };
+      const toggleSign = () => {
+        setNewUser(false);
+      };
     const [newUser, setNewUser] = useState(false);
     const [user, setUser] = useState({
       isSignedIn: false,
@@ -120,19 +128,24 @@ const Logins = () => {
     console.log(handleBlur)
   const classes = useStyles();
   return (
-    <Container component="main" maxWidth="xs">
+    <Container  component="main" maxWidth="xs">
       <CssBaseline />
+      {!loggedInUser.isSignedIn && (
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
+        {newUser?(
         <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
+          Create an account
+        </Typography>):(
+        <Typography component="h1" variant="h5">
+          Log In
+        </Typography>)}
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
           <Grid container spacing={2}>
-          {newUser && 
-            <Grid item  sm={12}>
+              {newUser && (
+          <Grid  item >
               <TextField
               onBlur={handleBlur}
                 autoComplete="fname"
@@ -140,11 +153,25 @@ const Logins = () => {
                 variant="outlined"
                 required
                 fullWidth
-                id="Name"
-                label="Your Name"
+                id="FirstName"
+                label="First Name"
                 autoFocus
               />
-            </Grid> }
+              <TextField
+              style={{ marginTop:'20px'}}
+              onBlur={handleBlur}
+                autoComplete="lname"
+                name="lastName"
+                variant="outlined"
+                required
+                fullWidth
+                id="LastName"
+                label="Last Name"
+                autoFocus
+              />
+              </Grid>)
+                }
+              
             
             <Grid item xs={12}>
               <TextField 
@@ -172,6 +199,7 @@ const Logins = () => {
                 autoComplete="current-password"
               />
             </Grid>
+            {newUser && (
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -184,37 +212,43 @@ const Logins = () => {
                 autoComplete="current-password"
               />
             </Grid>
+            )}
+             <Grid  item xs={12}>
+                {
+                    newUser ? <Button type='submit' fullWidth variant="contained" color="primary" >Create an account</Button>
+                    : <Button  type='submit' fullWidth variant="contained" color="primary"> Login </Button>
+                } 
+                </Grid> 
           </Grid>
-          <Button 
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit} 
-            
-          >
-            <input type="submit" value={newUser ? 'Sign up' : 'Sign in'}/>
-            Sign Up
-          </Button>
-          {
-                    newUser ? <Button fullWidth variant="contained" >Login</Button>
-                    : <Button fullWidth variant="contained"> Create an account </Button>
-                }  
-                {/* {newUser ? <button className="btn btn-outline-secondary mt-2" onClick={() => setNewUser(!newUser)}>Log In</button> : <button className="btn btn-outline-success mt-2" onClick={() => setNewUser(!newUser)}>Create an account</button>} */}
-                {newUser ? <p onClick={() => setNewUser(!newUser)}>Already have an account? Sign in</p> : <p onClick={() => setNewUser(!newUser)}> Create an account</p>}
-      <br />
-      {loggedInUser.email && <p style={{ color: "green" }}>user {newUser ? "created" : "logged in"} successfully</p>}
-      <br />
-          <Grid container justify="flex-end">
-            <Grid item>            
-            <label style={{cursor : "pointer"}}  onClick={() => setNewUser(!newUser)} name="newUser" >Already have an account? Sign in</label>
-                 
-
-            </Grid>
+           
+          <Grid style={{marginTop:'20px'}}>
+          {!newUser ? (
+            <label className='pt-2 alignCenter'>
+              Don't have an account?{' '}
+              <Link
+                to='/login'
+                onClick={toggleSignUp}
+                className='customAnchor'
+              >
+                Create a Account
+              </Link>
+            </label>
+          ) : (
+            <label className='pt-2 alignCenter'>
+              Already have an account?{' '}
+              <Link
+                to='/login'
+                onClick={toggleSign}
+                className='customAnchor'
+              >
+                Login
+              </Link>
+            </label>
+          )}
           </Grid>
         </form>
-      </div>
-    
+      
+      
       { user.isSignedIn ? <button onClick={signOut}>Sign Out</button> :
         <Button 
         type="submit"
@@ -227,8 +261,10 @@ const Logins = () => {
             Continue with Facebook
         </Button>
       }
+      
       { user.isSignedIn ? <button onClick={signOut}>Sign Out</button> :
         <Button 
+        style={{ marginTop:0}}
         type="submit"
         fullWidth
         variant="outlined"
@@ -238,6 +274,13 @@ const Logins = () => {
          >
              Continue with Google</Button>
       }
+      </div> )}
+      
+      {user.success && (
+        <p style={{ color: 'green' }}>
+          {newUser ? 'Create User' : 'Login In'} Successfully
+        </p>
+      )}
     
     </Container>
   );
