@@ -1,16 +1,15 @@
-# Travel Guru User Interface Application
+# Travel Guru - Travel-Website
 ## About
-Online Tour Booking System User Interface Project.
+Website for travel agency with bookings for hotel stays.<br>
 [Live-Site](https://travel-guru-rsardar.netlify.app)
 
 ## Features
-User Can Choose a Tour.
-Before Booked User Must Have to Logged in.
-User Can Sign in ( Facebook, Google, Email & Password)
-User Can See Available Hotel & Map Location.
+* User Account system
+* User Can Sign in ( Facebook, Google, Email & Password)
+* User Can See Available Hotel with Location Map.
 ## Technology
-ReactJs (JSX, Hooks, Contex-Api, Route, React-Google-Map)
-Firebase Auth (Google | Facebook | Email & Password)
-Bootstrap4
-HTML5
-CSS3
+* ReactJs (JSX, Hooks, Contex-Api, Route, React-Google-Map)
+* Firebase Auth (Google | Facebook | Email & Password)
+* Bootstrap4
+* HTML5
+* CSS3
